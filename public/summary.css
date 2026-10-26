@@ -1,0 +1,252 @@
+
+.menubar{ min-height: 100vh; }
+
+.menubar {
+  width: 255px;
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 20;
+  padding: 27px 19px;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+/* SUMMARY HEADER */
+.summary-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 28px;
+    margin-bottom: 20px;
+    color: white;
+    border-radius: 15px;
+    background: linear-gradient(120deg, #4f46e5, #7c3aed);
+    box-shadow: 0 8px 20px #cbd5e1;
+}
+
+.summary-header p {
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 10px;
+}
+
+.summary-header h1 {
+    font-size: 28px;
+    margin: 0 0 10px;
+}
+
+.summary-header span {
+    font-size: 14px;
+    color: #ede9fe;
+}
+
+.summary-header > i {
+    font-size: 48px;
+    opacity: 0.8;
+}
+
+/* STATISTICS CARDS */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    min-width: 0;
+    padding: 20px;
+    border-radius: 16px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 5px 18px #e2e8f0;
+    transition: transform 0.25s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.stat-card i {
+    font-size: 25px;
+
+}
+
+.stat-card p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 15px 0 8px;
+}
+
+.stat-card h2 {
+    font-size: 27px;
+    margin: 0 0 8px;
+    overflow-wrap: anywhere;
+}
+
+.stat-card span {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.purple i, .purple h2 { color: #6366f1; }
+.green i, .green h2 { color: #16a34a; }
+.orange i, .orange h2 { color: #ea580c; }
+.blue i, .blue h2 { color: #0284c7; }
+
+/* CHART LAYOUT */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.chart-card {
+    min-width: 0;
+    padding: 22px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px #e2e8f0;
+}
+
+.chart-card h2 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    color: #312e81;
+}
+
+.chart-card > p {
+    color: #64748b;
+    font-size: 13px;
+    margin: 0 0 18px;
+}
+
+.chart-area {
+    position: relative;
+    height: 280px;
+    width: 100%;
+}
+
+.doughnut-area {
+    max-width: 340px;
+    margin: auto;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* PROGRESS */
+.progress-card {
+    margin-top: 20px;
+}
+
+.progress-track {
+    height: 12px;
+    background: #e2e8f0;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+#progressFill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    border-radius: 20px;
+    transition: width 0.5s;
+}
+
+#progressLabel {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.footer-note {
+    text-align: center;
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 25px;
+}
+
+/* TABLET */
+@media (max-width: 1100px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* MOBILE */
+@media (max-width: 800px) {
+    .dashboard-layout {
+        flex-direction: column;
+    }
+
+    aside.menubar {
+        width: 100%;
+        min-width: 0;
+        min-height: auto;
+    }
+
+    .main-content {
+        padding: 16px;
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    .summary-header {
+        padding: 20px;
+    }
+
+    .summary-header h1 {
+        font-size: 23px;
+    }
+
+    .summary-header > i {
+        font-size: 32px;
+    }
+
+    .chart-area {
+        height: 250px;
+    }
+}
+
+@media (max-width: 400px) {
+    .stats-grid {
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 14px;
+    }
+
+    .stat-card h2 {
+        font-size: 22px;
+    }
+
+    .summary-header > i {
+        display: none;
+    }
+}
+body.dark-mode {
+    background: #111827;
+    color: #f9fafb;
+}
+
+body.dark-mode .card,
+body.dark-mode .topbar,
+body.dark-mode .sidebar {
+    background: #1f2937;
+    color: #f9fafb;
+}

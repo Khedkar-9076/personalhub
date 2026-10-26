@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clock & Date | Personal Hub</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f7fc;
+    color: #292451;
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 235px;
+    background: #f0edff;
+    padding: 25px 16px;
+    flex-shrink: 0;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+.logo span {
+    color: #7967e8;
+}
+
+.nav-link {
+    display: block;
+    text-decoration: none;
+    color: #393354;
+    padding: 14px 12px;
+    border-radius: 11px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: #7967e8;
+    color: white;
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+    padding: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.header h1 {
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.header p,
+.muted {
+    color: #85819c;
+    font-size: 14px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #ece8f8;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 5px 20px #34265b08;
+    margin-bottom: 22px;
+}
+
+.clock-card {
+    text-align: center;
+    background: linear-gradient(135deg, #7967e8, #a995f7);
+    color: white;
+    padding: 45px 20px;
+    border-radius: 24px;
+    margin-bottom: 22px;
+}
+
+.clock-card .label {
+    font-size: 14px;
+    opacity: 0.9;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+#clock {
+    font-size: clamp(40px, 7vw, 76px);
+    font-weight: bold;
+    margin: 22px 0;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+}
+
+#ampm {
+    font-size: 20px;
+}
+
+#fullDate {
+    font-size: 17px;
+    margin-top: 15px;
+}
+
+#year {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-top: 8px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.card h2 {
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+.calendar-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 8px;
+}
+
+button {
+    background: #7967e8;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    text-align: center;
+    gap: 7px;
+}
+
+.day-name {
+    color: #85819c;
+    font-size: 12px;
+    padding: 8px 0;
+}
+
+.day {
+    padding: 10px 0;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.day.today {
+    background: #7967e8;
+    color: white;
+    font-weight: bold;
+}
+
+.day.empty {
+    visibility: hidden;
+}
+
+.timer-display {
+    font-size: 44px;
+    font-weight: bold;
+    text-align: center;
+    margin: 22px 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.timer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.timer-input {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+input {
+    width: 75px;
+    padding: 10px;
+    border: 1px solid #e5e0f3;
+    border-radius: 9px;
+    text-align: center;
+    font-size: 15px;
+}
+
+footer {
+    text-align: center;
+    color: #85819c;
+    padding: 10px;
+    font-size: 12px;
+}
+
+@media (max-width: 800px) {
+    .sidebar {
+        width: 72px;
+        padding: 20px 8px;
+    }
+
+    .logo {
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .logo .logo-text,
+    .nav-text {
+        display: none;
+    }
+
+    .nav-link {
+        text-align: center;
+        padding: 14px 4px;
+        font-size: 19px;
+    }
+
+    .main {
+        padding: 18px 12px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+    .card {
+        padding: 18px 12px;
+    }
+}
+body.dark-mode {
+    background: #111827;
+    color: #f9fafb;
+}
+
+body.dark-mode .card,
+body.dark-mode .topbar,
+body.dark-mode .sidebar {
+    background: #1f2937;
+    color: #f9fafb;
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="logo">✿ <span class="logo-text">Personal Hub</span></div>
+
+        <a href="home.html" class="nav-link">🏠 <span class="nav-text">Home</span></a>
+        <a href="todo.html" class="nav-link">☑️ <span class="nav-text">To-Do List</span></a>
+        <a href="expense.html" class="nav-link">💰 <span class="nav-text">Expenses</span></a>
+        <a href="quotes.html" class="nav-link">💜 <span class="nav-text">Daily Quotes</span></a>
+        <a href="clock.html" class="nav-link active">🕒 <span class="nav-text">Clock & Date</span></a>
+    </aside>
+
+    <main class="main">
+
+        <header class="header topbar">
+            <div>
+                <h1>Clock & Date 🕒</h1>
+                <p>Every moment is a fresh beginning.</p>
+            </div>
+             <div class="top-actions">
+         <div class="topbar-right">
+            <span class="month-label" id="current-month"></span>
+            <span class="avatar">💜</span>
+        </div>
+        <button class="icon-btn" id="topThemeButton"
+                aria-label="Toggle theme">🌙</button>
+
+        <button class="icon-btn" id="navToggle"
+                aria-label="Open navigation"
+                aria-expanded="false">☰</button>
+    </div>
+        </header>
+        <nav class="navigation-menu" id="navigationMenu">
+    <a href="home.html">⌂ Home</a>
+    <a href="todo.html">✓ To-Do List</a>
+    <a href="expense.html">₹ Expense Tracker</a>
+    <a href="quotes.html">❝ Daily Quotes</a>
+    <a href="summary.html">Summary</a>
+</nav>
+
+        <!-- LIVE CLOCK -->
+        <section class="clock-card">
+            <div class="label">Current Local Time</div>
+            <div id="clock">00:00:00 <span id="ampm">AM</span></div>
+            <div id="fullDate">Loading date...</div>
+            <div id="year"></div>
+        </section>
+
+        <section class="grid">
+
+            <!-- CALENDAR -->
+            <div class="card">
+                <div class="calendar-head">
+                    <button id="prevMonth" aria-label="Previous month">❮</button>
+                    <h2 id="monthYear" style="margin:0">Calendar</h2>
+                    <button id="nextMonth" aria-label="Next month">❯</button>
+                </div>
+                <div class="calendar-grid" id="calendar"></div>
+                <p class="muted" style="margin-top:18px">
+                    💜 Today's date is highlighted.
+                </p>
+            </div>
+
+            <!-- COUNTDOWN TIMER -->
+            <div class="card">
+                <h2>⏳ Countdown Timer</h2>
+                <p class="muted">Set a timer for study or daily tasks.</p>
+
+                <div class="timer-input">
+                    <input id="minutes" type="number"
+                           min="0" max="999" value="5"
+                           aria-label="Minutes">
+                    <span style="align-self:center">min</span>
+                    <input id="seconds" type="number"
+                           min="0" max="59" value="0"
+                           aria-label="Seconds">
+                    <span style="align-self:center">sec</span>
+                </div>
+
+                <div class="timer-display" id="timer">05:00</div>
+
+                <div class="timer-buttons">
+                    <button id="startTimer">▶ Start</button>
+                    <button id="pauseTimer">⏸ Pause</button>
+                    <button id="resetTimer">↻ Reset</button>
+                </div>
+                <p class="muted" id="timerMessage"
+                   style="text-align:center;margin-top:18px">
+                    Ready when you are!
+                </p>
+            </div>
+
+        </section>
+
+        <footer>Made with 💜 | Personal Hub © 2026</footer>
+
+    </main>
+</div>
+<script src="navigation.js"></script>
+<script>
+// Live clock
+function updateClock() {
+    const now = new Date();
+
+    document.getElementById("clock").innerHTML =
+        now.toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true
+        }).replace(/(AM|PM)/, '<span id="ampm">$1</span>');
+
+    document.getElementById("fullDate").textContent =
+        now.toLocaleDateString("en-IN", {
+            weekday: "long",
+            day: "numeric",
+            month: "long"
+        });
+
+    document.getElementById("year").textContent =
+        now.getFullYear();
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+// Calendar
+let shownMonth = new Date();
+
+function renderCalendar() {
+    const year = shownMonth.getFullYear();
+    const month = shownMonth.getMonth();
+
+    document.getElementById("monthYear").textContent =
+        shownMonth.toLocaleDateString("en-IN", {
+            month: "long",
+            year: "numeric"
+        });
+
+    const calendar = document.getElementById("calendar");
+    calendar.innerHTML = "";
+
+    ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        .forEach(name => {
+            const el = document.createElement("div");
+            el.className = "day-name";
+            el.textContent = name;
+            calendar.appendChild(el);
+        });
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const today = new Date();
+
+    for (let i = 0; i < firstDay; i++) {
+        const blank = document.createElement("div");
+        blank.className = "day empty";
+        calendar.appendChild(blank);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const el = document.createElement("div");
+        el.className = "day";
+        el.textContent = day;
+
+        if (
+            day === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear()
+        ) {
+            el.classList.add("today");
+        }
+
+        calendar.appendChild(el);
+    }
+}
+
+document.getElementById("prevMonth").onclick = () => {
+    shownMonth.setMonth(shownMonth.getMonth() - 1);
+    renderCalendar();
+};
+
+document.getElementById("nextMonth").onclick = () => {
+    shownMonth.setMonth(shownMonth.getMonth() + 1);
+    renderCalendar();
+};
+
+renderCalendar();
+
+// Countdown timer
+let remaining = 300;
+let timerInterval = null;
+
+function displayTimer() {
+    const mins = Math.floor(remaining / 60);
+    const secs = remaining % 60;
+
+    document.getElementById("timer").textContent =
+        String(mins).padStart(2, "0") + ":" +
+        String(secs).padStart(2, "0");
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+function resetFromInputs() {
+    stopTimer();
+
+    const mins = Math.max(0, Math.min(999,
+        Number(document.getElementById("minutes").value) || 0));
+
+    const secs = Math.max(0, Math.min(59,
+        Number(document.getElementById("seconds").value) || 0));
+
+    remaining = mins * 60 + secs;
+    displayTimer();
+
+    document.getElementById("timerMessage").textContent =
+        "Ready when you are!";
+}
+
+document.getElementById("startTimer").onclick = () => {
+    if (timerInterval !== null) return;
+
+    if (remaining <= 0) {
+        document.getElementById("timerMessage").textContent =
+            "Set a time greater than zero.";
+        return;
+    }
+
+    document.getElementById("timerMessage").textContent = "Timer running...";
+
+    timerInterval = setInterval(() => {
+        remaining--;
+        displayTimer();
+
+        if (remaining <= 0) {
+            stopTimer();
+            document.getElementById("timerMessage").textContent =
+                "Time is up! 🎉";
+        }
+    }, 1000);
+};
+
+document.getElementById("pauseTimer").onclick = () => {
+    stopTimer();
+    document.getElementById("timerMessage").textContent = "Timer paused.";
+};
+
+document.getElementById("resetTimer").onclick = resetFromInputs;
+
+document.getElementById("minutes").onchange = resetFromInputs;
+document.getElementById("seconds").onchange = resetFromInputs;
+
+displayTimer();
+</script>
+
+</body>
+</html>

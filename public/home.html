@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/style.css">
+<title>Personal Hub | Dashboard</title>
+</head>
+
+<body>
+    
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">✿</span>
+            <div>
+                <h2>Personal Hub</h2>
+                <p>Plan · Track · Achieve</p>
+            </div>
+        </div>
+
+        <p class="menu-label">WORKSPACE</p>
+
+        <a class="nav-link active" href="/public/home.html">
+            🏠 <span class="nav-text">Home</span>
+        </a>
+        <a class="nav-link" href="todo.html">
+            ☑️ <span class="nav-text">To-Do List</span>
+        </a>
+        <a class="nav-link" href="expense.html">
+            💰 <span class="nav-text">Expense Tracker</span>
+        </a>
+        <a class="nav-link" href="quotes.html">
+            💜 <span class="nav-text">Daily Quotes</span>
+        </a>
+        <a class="nav-link" href="clock.html">
+            🕒 <span class="nav-text">Clock & Date</span>
+        </a>
+        <a class="nav-link" href="#summary" onclick="window.location.href='summary.html'">
+            📊 <span class="nav-text">All Summary</span>
+        </a>
+
+        <p class="menu-label">PREFERENCES</p>
+
+        <button class="nav-link" id="themeButton"
+                style="width:100%;border:none;background:transparent;cursor:pointer;text-align:left">
+            🌙 <span class="nav-text">Toggle Theme</span>
+        </button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <h1>My Dashboard ✨</h1>
+                <p>Your personal space to plan, track and grow.</p>
+            </div>
+            
+<div class="top-actions">
+    <div class="clock" id="clock">
+        <span id="time">--:--:--</span>
+        <small id="date">Loading date...</small>
+    </div>
+
+    <button class="icon-btn" id="topThemeButton"
+            aria-label="Toggle theme">🌙</button>
+
+    <!-- Navigation Button -->
+    <button class="icon-btn" id="navToggle"
+            aria-label="Open navigation"
+            aria-expanded="false">☰</button>
+</div>
+
+<nav class="navigation-menu" id="navigationMenu">
+    <a href="home.html">⌂ Home</a>
+    <a href="todo.html">✓ To-Do List</a>
+    <a href="expense.html">₹ Expense Tracker</a>
+    <a href="quotes.html">❝ Daily Quotes</a>
+    <a href="summary.html">Summary</a>
+
+</nav>
+
+
+        </header>
+
+        <!-- WELCOME -->
+        <section class="welcome">
+            <div>
+                <h2 id="greeting">Welcome back! 👋</h2>
+                <p>Small steps every day lead to big results.</p>
+                <p style="margin-top:15px;font-size:12px">
+                    ✨ Make today meaningful.
+                </p>
+            </div>
+            <div class="welcome-icon">🌷</div>
+        </section>
+
+        <!-- SUMMARY CARDS -->
+        <section class="stats" id="summary">
+
+            <div class="card purple">
+                <div class="stat-icon">☑️</div>
+                <h3>Total Tasks</h3>
+                <div class="stat-value" id="total-tasks">0</div>
+                <p class="muted">Tasks in your list</p>
+            </div>
+
+            <div class="card green">
+                <div class="stat-icon">✅</div>
+                <h3>Completed</h3>
+                <div class="stat-value" id="completed-tasks">0</div>
+                <p class="muted">Tasks completed</p>
+            </div>
+
+            <div class="card blue">
+                <div class="stat-icon">💰</div>
+                <h3>Remaining Balance</h3>
+                <div class="stat-value" id="quick-balance">₹0</div>
+                <p class="muted">Income minus expenses</p>
+            </div>
+    
+       
+<div class="card orange">
+    <div class="stat-icon">🎯</div>
+    <h3>Daily Goal</h3>
+
+    <div class="stat-value" id="today-goals">0/5</div>
+
+    <div class="progress-track">
+        <div class="progress-fill" id="goal-progress-bar"></div>
+    </div>
+
+    <p class="muted" id="goal-progress-text">
+        0% completed today
+    </p>
+</div>
+
+
+        </section>
+
+        <!-- TASKS + EXPENSES -->
+        <section class="content-grid">
+
+            <div class="card">
+                <div class="section-head">
+                    <h2>📝 Today's Tasks</h2>
+                    <a class="small-link" href="todo.html">View all →</a>
+                </div>
+
+                <form class="task-form" id="taskForm">
+                    <input id="taskInput" type="text"
+                           placeholder="What do you need to do?"
+                           maxlength="120" required>
+                    <button class="btn" type="submit">+ Add Task</button>
+                </form>
+
+                <ul class="task-list" id="taskList"></ul>
+                <p class="muted" id="taskMessage">
+                    Add your first task to get started.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="section-head">
+                    <h2>💳 Expense Overview</h2>
+                    <a class="small-link" href="expense.html">Details →</a>
+                </div>
+
+                <p class="muted">Current remaining balance</p>
+                 <div class="expense-number" id="expenseBalance">₹0</div>
+
+                <div class="progress-track">
+                    <div class="progress-fill"  id="expenseProgress" style="width:21.15%"></div>
+                </div>
+                     <p class="muted">  Total income: ₹<span id="dashboardIncome">0</span></p>
+
+                    <p class="muted">Total spent: ₹<span id="dashboardExpense">0</span></p>
+
+                <a href="expense.html" style="text-decoration:none">
+                    <button class="btn" style="width:100%;margin-top:18px">
+                        Open Expense Tracker →
+                    </button>
+                </a>
+            </div>
+        </section>
+
+        <!-- QUICK LINKS + QUOTE -->
+        <section class="content-grid">
+
+            <div class="card">
+                <div class="section-head">
+                    <h2>⚡ Quick Access</h2>
+                </div>
+
+                <div class="quick-links">
+                    <a class="quick-link" href="todo.html">
+                        <span>📝</span>
+                        <p>To-Do List</p>
+                    </a>
+                    <a class="quick-link" href="expense.html">
+                        <span>💰</span>
+                        <p>Expenses</p>
+                    </a>
+                    <a class="quick-link" href="quotes.html">
+                        <span>💜</span>
+                        <p>Daily Quotes</p>
+                    </a>
+                    <a class="quick-link" href="clock.html">
+                        <span>🕒</span>
+                        <p>Clock</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="quote">
+                <h3>✨ Daily Inspiration</h3>
+                <p id="quoteText">
+                    "Believe in yourself and all that you are."
+                </p>
+                <button id="newQuote">New Quote ↻</button>
+            </div>
+
+        </section>
+
+        <footer>
+            Made with 💜 | Personal Hub © 2026
+        </footer>
+
+    </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

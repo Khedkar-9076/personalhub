@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker | Finance Dashboard</title>
+    <link rel="stylesheet" href="expense.css">
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+<div class="dashboard">
+<header class="topbar">
+    <div class="brand">
+            <div class="brand-icon">₹</div>
+            <div>
+                <h1>Expense Tracker</h1>
+                <p>Manage your money with confidence</p>
+            </div>
+        </div>
+
+    <div class="top-actions">
+         <div class="topbar-right">
+            <span class="month-label" id="current-month"></span>
+            <span class="avatar">💜</span>
+        </div>
+        <button class="icon-btn" id="topThemeButton"
+                aria-label="Toggle theme">🌙</button>
+
+        <button class="icon-btn" id="navToggle"
+                aria-label="Open navigation"
+                aria-expanded="false">☰</button>
+    </div>
+<nav class="navigation-menu" id="navigationMenu">
+    <a href="home.html">⌂ Home</a>
+    <a href="todo.html">✓ To-Do List</a>
+    <a href="expense.html">₹ Expense Tracker</a>
+    <a href="quotes.html">❝ Daily Quotes</a>
+    <a href="summary.html">Summary</a>
+</nav>
+
+    </header>
+
+    <main>
+        <section class="welcome">
+            <div>
+                <p class="eyebrow">YOUR FINANCIAL OVERVIEW</p>
+                <h2>Money matters, made simple.</h2>
+                <p class="welcome-text">Track your spending, plan your budget, and grow your savings.</p>
+            </div>
+        </section>
+
+        <!-- Summary cards -->
+        <section class="summary-grid">
+            <article class="summary-card income-card">
+                <div class="card-top">
+                    <span>Total Income</span>
+                    <span class="card-icon">↗</span>
+                </div>
+                <h3>₹<span id="total-income">0</span></h3>
+                <p>Monthly income</p>
+            </article>
+
+            <article class="summary-card expense-card">
+                <div class="card-top">
+                    <span>Total Expenses</span>
+                    <span class="card-icon">↘</span>
+                </div>
+                <h3>₹<span id="total-expense">0</span></h3>
+                <p>Spent this month</p>
+            </article>
+
+            <article class="summary-card balance-card">
+                <div class="card-top">
+                    <span>Remaining Balance</span>
+                    <span class="card-icon">₹</span>
+                </div>
+                <h3>₹<span id="remaining-balance">0</span></h3>
+                <p>Income minus expenses</p>
+            </article>
+        </section>
+
+        <!-- Income and budget settings -->
+        <section class="settings-grid">
+            <article class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Monthly Income</h3>
+                        <p>Set your income for this month</p>
+                    </div>
+                    <span class="heading-icon">💰</span>
+                </div>
+
+                <div class="inline-form">
+                    <input type="number" id="income-input" min="0" step="0.01"
+                           placeholder="Enter monthly income">
+                    <button id="set-income-btn" type="button">Save Income</button>
+                </div>
+            </article>
+
+            <article class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Monthly Budget Limit</h3>
+                        <p>Set how much you want to spend</p>
+                    </div>
+                    <span class="heading-icon">🎯</span>
+                </div>
+
+                <div class="inline-form">
+                    <input type="number" id="budget-input" min="0" step="0.01"
+                           placeholder="Enter expense budget">
+                    <button id="set-budget-btn" type="button">Save Budget</button>
+                </div>
+            </article>
+        </section>
+
+        <!-- Savings progress -->
+        <section class="panel savings-panel">
+            <div class="panel-heading">
+                <div>
+                    <h3>Monthly Savings Progress</h3>
+                    <p id="savings-message">Set your income to see your savings progress.</p>
+                </div>
+                <span class="savings-percent" id="savings-percent">0%</span>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill" id="savings-progress"></div>
+            </div>
+
+            <div class="progress-labels">
+                <span>Spent: ₹<span id="progress-spent">0</span></span>
+                <span>Income: ₹<span id="progress-income">0</span></span>
+            </div>
+        </section>
+
+        <!-- Add expense -->
+        <section class="panel add-panel">
+            <div class="panel-heading">
+                <div>
+                    <h3>Add New Expense</h3>
+                    <p>Record where your money goes</p>
+                </div>
+                <span class="heading-icon">＋</span>
+            </div>
+
+            <div class="expense-form-grid">
+                <div class="field">
+                    <label for="expense-name">Expense description</label>
+                    <input type="text" id="expense-name"
+                           placeholder="e.g. Groceries, Bus pass">
+                </div>
+
+                <div class="field">
+                    <label for="expense-amount">Amount (₹)</label>
+                    <input type="number" id="expense-amount" min="0.01" step="0.01"
+                           placeholder="Enter amount">
+                </div>
+
+                <div class="field">
+                    <label for="expense-category">Category</label>
+                    <select id="expense-category">
+                        <option value="Food">Food</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Bills">Bills &amp; Utilities</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <button id="add-expense-btn" type="button" class="add-button">
+                    + Add Expense
+                </button>
+            </div>
+        </section>
+
+        <!-- Transactions table -->
+        <section class="panel transactions-panel">
+            <div class="panel-heading transaction-heading">
+                <div>
+                    <h3>Recent Transactions</h3>
+                    <p>View, search, edit, or delete your expenses</p>
+                </div>
+                <span class="transaction-count" id="transaction-count">0 records</span>
+            </div>
+
+            <div class="filters">
+                <div class="search-box">
+                    <span>⌕</span>
+                    <input type="search" id="expense-search"
+                           placeholder="Search expenses...">
+                </div>
+
+                <select id="filter-category" aria-label="Filter by category">
+                    <option value="All">All Categories</option>
+                    <option value="Food">Food</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Bills">Bills &amp; Utilities</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <input type="month" id="filter-month" aria-label="Filter by month">
+                <button type="button" class="reset-button" id="reset-filters">
+                    Reset
+                </button>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="exlist"></tbody>
+                </table>
+            </div>
+
+            <p id="table-empty" class="empty-state" hidden>
+                No expenses found. Try another filter or add an expense.
+            </p>
+        </section>
+
+        <!-- Chart and category summary -->
+        <section class="analytics-grid">
+            <article class="panel chart-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Monthly Expense Overview</h3>
+                        <p>Your spending over the last six months</p>
+                    </div>
+                    <span class="heading-icon">📊</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="expense-chart"></canvas>
+                </div>
+            </article>
+
+            <article class="panel category-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Spending by Category</h3>
+                        <p>This month's category breakdown</p>
+                    </div>
+                    <span class="heading-icon">◉</span>
+                </div>
+                <div id="category-summary-list"></div>
+            </article>
+        </section>
+
+        <footer>Made for better money habits 💜</footer>
+    </main>
+</div>
+
+<script src="expense.js"></script>
+<script src="navigation.js"></script>
+</body>
+</html>

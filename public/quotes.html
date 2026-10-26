@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link  rel="stylesheet" href="style.css">
+<title>Daily Quotes 💜</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #f8efff, #fff3f7, #edf5ff);
+  color: #514363;
+  min-height: 100vh;
+  padding: 25px 16px;
+  transition: .3s;
+}
+
+body.dark {
+  background: linear-gradient(135deg, #211b35, #38253f, #202b40);
+  color: #f7edff;
+}
+
+.container {
+  max-width: 760px;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+h1 {
+  font-size: clamp(25px, 5vw, 36px);
+  color: #9873c8;
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: #8c7c9d;
+}
+
+button, select {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 14px;
+  padding: 11px 15px;
+}
+
+.theme-btn {
+  background: #ffffffb8;
+  color: #7957a6;
+  font-size: 20px;
+}
+
+.categories {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.category {
+  background: #ffffffb8;
+  color: #8568a6;
+  border: 1px solid #eadcf8;
+}
+
+.category.active {
+  background: #b69add;
+  color: white;
+}
+
+.quote-card {
+  background: #ffffffd9;
+  border: 1px solid #ffffff;
+  border-radius: 28px;
+  padding: clamp(25px, 6vw, 48px);
+  text-align: center;
+  box-shadow: 0 15px 45px #9272b51a;
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .quote-card {
+  background: #ffffff12;
+  border-color: #ffffff20;
+}
+
+.flower {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.label {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  color: #a18ab8;
+}
+
+#quote {
+  font-family: Georgia, serif;
+  font-size: clamp(24px, 5vw, 36px);
+  line-height: 1.5;
+  margin: 25px 0;
+}
+
+#author {
+  color: #a17fbd;
+  font-style: italic;
+  margin-bottom: 28px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.primary {
+  background: linear-gradient(135deg, #b69add, #e3a9ca);
+  color: white;
+}
+
+.secondary {
+  background: #f4eafa;
+  color: #7957a6;
+}
+
+button {
+  transition: transform .2s, opacity .2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  opacity: .9;
+}
+
+.message {
+  min-height: 24px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #9c7abb;
+}
+
+.favorites {
+  margin-top: 28px;
+  padding: 22px;
+  border-radius: 22px;
+  background: #ffffff80;
+}
+
+.dark .favorites {
+  background: #ffffff10;
+}
+
+.favorites h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+#favoriteList {
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+footer {
+  text-align: center;
+  margin: 30px 0 10px;
+  font-size: 13px;
+  color: #a18ab8;
+}
+
+@media (max-width: 480px) {
+  header { align-items: flex-start; }
+  .actions button { flex: 1 1 40%; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <header class="topbar">
+    <div>
+      <h1>Little Words, Big Feelings 💜</h1>
+      <p class="subtitle">A little reminder for your beautiful journey 🌷</p>
+    </div>
+    <div class="top-actions">
+    <button class="icon-btn" id="topThemeButton"
+            aria-label="Toggle theme">
+        🌙
+    </button>
+    <button class="icon-btn" id="navToggle"
+            aria-label="Open navigation"
+            aria-expanded="false">
+        ☰
+    </button>
+</div>
+      </header>
+        <nav class="navigation-menu" id="navigationMenu">
+    <a href="home.html">⌂ Home</a>
+    <a href="todo.html">✓ To-Do List</a>
+    <a href="expense.html">₹ Expense Tracker</a>
+    <a href="quotes.html">❝ Daily Quotes</a>
+    <a href="summary.html">Summary</a>
+</nav>
+ 
+
+  <div class="categories">
+    <button class="category active" onclick="setCategory('All', this)">✨ All</button>
+    <button class="category" onclick="setCategory('Motivation', this)">🌈 Motivation</button>
+    <button class="category" onclick="setCategory('Self-Love', this)">🪷 Self-Love</button>
+    <button class="category" onclick="setCategory('Study', this)">📚 Study</button>
+    <button class="category" onclick="setCategory('Happiness', this)">☁️ Happiness</button>
+  </div>
+
+  <section class="quote-card">
+    <div class="flower">🌸 ✨ 🌷</div>
+    <div class="label">Your little daily reminder</div>
+    <p id="quote">You are becoming the person you once dreamed of being.</p>
+    <p id="author">— A gentle reminder</p>
+
+    <div class="actions">
+      <button class="primary" onclick="newQuote()">✨ New Quote</button>
+      <button class="secondary" onclick="toggleFavorite()">🤍 Favorite</button>
+      <button class="secondary" onclick="copyQuote()">📋 Copy</button>
+      <button class="secondary" onclick="shareQuote()">💌 Share</button>
+    </div>
+    <p class="message" id="message" aria-live="polite"></p>
+  </section>
+
+  <section class="favorites">
+    <h2>💗 Your Saved Quotes</h2>
+    <div id="favoriteList">Your favorite quotes will appear here 🌷</div>
+  </section>
+
+  <footer>Made with love, for your little moments of peace ♡</footer>
+</div>
+
+<script>
+const quotes = [
+  {text:"You are becoming the person you once dreamed of being.", author:"A gentle reminder", category:"Motivation"},
+  {text:"Bloom at your own pace. Even flowers take their time.", author:"A gentle reminder", category:"Self-Love"},
+  {text:"Small progress is still progress. Keep showing up.", author:"A gentle reminder", category:"Study"},
+  {text:"You deserve the same love you so freely give to others.", author:"A gentle reminder", category:"Self-Love"},
+  {text:"One day, your little efforts will become your biggest achievements.", author:"A gentle reminder", category:"Motivation"},
+  {text:"You do not have to be perfect to be wonderful.", author:"A gentle reminder", category:"Self-Love"},
+  {text:"Your future self will thank you for what you do today.", author:"A gentle reminder", category:"Study"},
+  {text:"Collect moments, not reasons to worry.", author:"A gentle reminder", category:"Happiness"},
+  {text:"A soft heart is a strength, not a weakness.", author:"A gentle reminder", category:"Happiness"},
+  {text:"Give yourself permission to begin again.", author:"A gentle reminder", category:"Motivation"},
+  {text:"Rest is part of the journey, too.", author:"A gentle reminder", category:"Self-Love"},
+  {text:"You are allowed to grow beyond who you used to be.", author:"A gentle reminder", category:"Motivation"},
+  {text:"Study today, shine tomorrow. One step at a time.", author:"A gentle reminder", category:"Study"},
+  {text:"There is beauty in the ordinary moments of life.", author:"A gentle reminder", category:"Happiness"},
+  {text:"You have survived every difficult day so far.", author:"A gentle reminder", category:"Motivation"}
+];
+
+let currentQuote = quotes[0];
+let currentCategory = "All";
+let favorites = JSON.parse(localStorage.getItem("quoteFavorites") || "[]");
+
+function displayQuote(q) {
+  currentQuote = q;
+  document.getElementById("quote").textContent = q.text;
+  document.getElementById("author").textContent = "— " + q.author;
+  document.getElementById("message").textContent = "";
+}
+
+function newQuote() {
+  const pool = quotes.filter(q =>
+    currentCategory === "All" || q.category === currentCategory
+  );
+  const others = pool.filter(q => q.text !== currentQuote.text);
+  const options = others.length ? others : pool;
+  displayQuote(options[Math.floor(Math.random() * options.length)]);
+}
+
+function setCategory(category, button) {
+  currentCategory = category;
+  document.querySelectorAll(".category").forEach(b => b.classList.remove("active"));
+  button.classList.add("active");
+  newQuote();
+}
+
+function toggleFavorite() {
+  const exists = favorites.some(q => q.text === currentQuote.text);
+  favorites = exists
+    ? favorites.filter(q => q.text !== currentQuote.text)
+    : [...favorites, currentQuote];
+
+  localStorage.setItem("quoteFavorites", JSON.stringify(favorites));
+  renderFavorites();
+  document.getElementById("message").textContent =
+    exists ? "Removed from favorites 🤍" : "Saved to your favorites 💗";
+}
+
+function renderFavorites() {
+  const list = document.getElementById("favoriteList");
+  if (!favorites.length) {
+    list.textContent = "Your favorite quotes will appear here 🌷";
+    return;
+  }
+
+  list.replaceChildren();
+  favorites.forEach(q => {
+    const item = document.createElement("p");
+    item.textContent = "♡ " + q.text;
+    item.style.marginBottom = "8px";
+    list.appendChild(item);
+  });
+}
+
+async function copyQuote() {
+  try {
+    await navigator.clipboard.writeText(
+      `“${currentQuote.text}” — ${currentQuote.author}`
+    );
+    document.getElementById("message").textContent = "Copied with love! 📋💜";
+  } catch {
+    document.getElementById("message").textContent =
+      "Clipboard access is unavailable in this browser.";
+  }
+}
+
+async function shareQuote() {
+  const text = `“${currentQuote.text}” — ${currentQuote.author}`;
+  if (navigator.share) {
+    try {
+      await navigator.share({title: "Daily Quote 💜", text});
+    } catch {}
+  } else {
+    await copyQuote();
+  }
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+  document.querySelector(".theme-btn").textContent =
+    document.body.classList.contains("dark") ? "☀️" : "🌙";
+}
+
+renderFavorites();
+</script>
+<script src="navigation.js"></script>
+</body>
+</html>

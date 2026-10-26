@@ -1,0 +1,56 @@
+REQUIREMENT FOR PERSONAL DASHBOARD
+
+What we are doing in it and what it give to us:
+live timer 
+to do list 
+expense tracker
+daily qutes
+local storage
+
+1create account 
+	login 
+	sign up 
+
+2.dashboard
+	to do list
+	expense tracter
+	daily qoutes
+	greeting 
+	clock and date widget
+
+3.to do list 
+	adding new message
+	checkbox
+	removing message
+	clear all
+
+4.expense tracker	
+	add income
+	add amount spent 
+	show remaining 
+	total expense
+
+5.daily qoutes
+	show motivating and ispiring qoutes
+	changes
+
+6.greeting 
+	good morning
+	good afternoon 
+	good night
+	as user open at time 
+
+7.	clock and date widget
+	live update clock
+	12/24 hrs format
+	dispaly day-date-year
+
+8.theme toggle
+	dark 
+	light
+
+9.local storage
+	setitem
+	getitem
+	removeitem
+	clear

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TaskFlow | Summary</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="summary.css">
+
+    <script src="https://kit.fontawesome.com/160fc2afb2.js"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="dash">
+<div class="dashboard-layout">
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="summary-header topbar">
+            <div>
+                <p>YOUR PERFORMANCE</p>
+                <h1>Summary & Analytics</h1>
+                <span>Understand your productivity at a glance.</span>
+            </div>
+             <div class="top-actions">
+                 <i class="fa-solid fa-chart-column"></i>
+         <div class="topbar-right">
+        </div>
+        <button class="icon-btn" id="topThemeButton"
+                aria-label="Toggle theme">🌙</button>
+
+        <button class="icon-btn" id="navToggle"
+                aria-label="Open navigation"
+                aria-expanded="false">☰</button>
+    </div>
+        </header>
+        <nav class="navigation-menu" id="navigationMenu">
+    <a href="home.html">⌂ Home</a>
+    <a href="todo.html">✓ To-Do List</a>
+    <a href="expense.html">₹ Expense Tracker</a>
+    <a href="quotes.html">❝ Daily Quotes</a>
+    <a href="summary.html">Summary</a>
+</nav>
+    
+
+        <!-- SUMMARY CARDS -->
+        <section class="stats-grid">
+
+            <div class="stat-card purple">
+                <i class="fa-solid fa-list-check"></i>
+                <p>Total Tasks</p>
+                <h2 id="totalTasks">0</h2>
+                <span>All your tasks</span>
+            </div>
+
+            <div class="stat-card green">
+                <i class="fa-solid fa-circle-check"></i>
+                <p>Completed</p>
+                <h2 id="completedTasks">0</h2>
+                <span>Finished tasks</span>
+            </div>
+
+            <div class="stat-card orange">
+                <i class="fa-solid fa-clock"></i>
+                <p>Pending</p>
+                <h2 id="pendingTasks">0</h2>
+                <span>Tasks remaining</span>
+            </div>
+
+            <div class="stat-card blue">
+                <i class="fa-solid fa-wallet"></i>
+                <p>Total Expenses</p>
+                <h2 id="totalExpenses">₹0</h2>
+                <span>Expense overview</span>
+            </div>
+
+        </section>
+
+        <!-- CHARTS -->
+           <section class="charts-grid">
+
+            <div class="chart-card">
+                <h2>📊 Weekly Task Completion</h2>
+                <p>Tasks completed each day</p>
+                <div class="chart-area">
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h2>🍩 Expense Breakdown</h2>
+                <p>Expenses by category</p>
+                <div class="chart-area doughnut-area">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card full-width">
+                <h2>📈 Income vs Expenses</h2>
+                <p>Monthly financial overview</p>
+                <div class="chart-area">
+                    <canvas id="financeChart"></canvas>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TASK PROGRESS -->
+        <section class="chart-card progress-card">
+            <h2>🎯 Overall Task Progress</h2>
+
+            <div class="progress-track">
+                <div id="progressFill"></div>
+            </div>
+
+            <p id="progressLabel">0% completed</p>
+        </section>
+
+        <p class="footer-note">TaskFlow Analytics · Stay productive!</p>
+
+    </main>
+
+</div>
+
+<script src="summary.js"></script>
+<script src="navigation.js"></script>
+
+</body>
+</html>
+</html>

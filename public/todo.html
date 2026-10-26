@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow | My Planner</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="todo.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#">
+        <span class="brand-icon"><i class="fa-solid fa-check-double"></i></span>
+        <span>TaskFlow<small>YOUR DAILY PLANNER</small></span>
+      </a>
+
+      <div class="profile">
+        <div class="avatar">M</div>
+        <div><strong>My Planner</strong><small>Student · AI & Data Science</small></div>
+      </div>
+
+      <p class="section-label">WORKSPACE</p>
+      <nav class="nav-menu">
+        <button class="nav-item active" data-filter="all">
+          <i class="fa-solid fa-layer-group"></i> All Tasks <span id="count-all">0</span>
+        </button>
+        <button class="nav-item" data-filter="today">
+          <i class="fa-regular fa-calendar-check"></i> Today <span id="count-today">0</span>
+        </button>
+        <button class="nav-item" data-filter="pending">
+          <i class="fa-regular fa-clock"></i> Pending <span id="count-pending">0</span>
+        </button>
+        <button class="nav-item" data-filter="completed">
+          <i class="fa-solid fa-circle-check"></i> Completed <span id="count-completed">0</span>
+        </button>
+        <button class="nav-item" data-filter="overdue">
+          <i class="fa-solid fa-calendar-xmark"></i> Overdue <span id="count-overdue">0</span>
+        </button>
+      </nav>
+
+      <p class="section-label">CATEGORIES</p>
+      <div class="category-list" id="category-filter-list">
+        <button class="cat-pill active" data-category="all">All</button>
+        <button class="cat-pill" data-category="Study">📚 Study</button>
+        <button class="cat-pill" data-category="Work">💻 Work</button>
+        <button class="cat-pill" data-category="Personal">🌸 Personal</button>
+        <button class="cat-pill" data-category="Health">💗 Health</button>
+        <button class="cat-pill" data-category="Shopping">🛍️ Shopping</button>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="tip-card">
+          <span>✨ A little reminder</span>
+          <p>Small steps every day lead to big results.</p>
+        </div>
+        <button id="theme-toggle" class="theme-button">
+          <i class="fa-regular fa-moon"></i>
+          <span>Switch to dark mode</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="top-header">
+        <button id="menu-toggle" class="icon-btn mobile-menu" aria-label="Open menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div>
+          <p class="eyebrow">YOUR PERSONAL SPACE ✨</p>
+          <h1 id="greeting">Hello, welcome back!</h1>
+          <p class="muted" id="current-date"></p>
+        </div>
+    
+<div class="top-actions">
+   <button class="btn-primary" id="open-modal-btn">
+          <i class="fa-solid fa-plus"></i> <span>New Task</span>
+        </button>
+    <button class="icon-btn" id="topThemeButton"
+            aria-label="Toggle theme">
+        🌙
+    </button>
+    <button class="icon-btn" id="navToggle"
+            aria-label="Open navigation"
+            aria-expanded="false">
+        ☰
+    </button>
+</div>
+      </header>
+        <nav class="navigation-menu" id="navigationMenu">
+    <a href="home.html">⌂ Home</a>
+    <a href="todo.html">✓ To-Do List</a>
+    <a href="expense.html">₹ Expense Tracker</a>
+    <a href="quotes.html">❝ Daily Quotes</a>
+    <a href="summary.html">Summary</a>
+</nav>
+
+      <section class="welcome-card">
+        <div>
+          <span class="welcome-tag">YOUR DAILY FOCUS</span>
+          <h2>Make today count 🌷</h2>
+          <p>One task at a time. You've got this!</p>
+        </div>
+        <div class="welcome-art"><i class="fa-solid fa-seedling"></i></div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card purple">
+          <div class="stat-top"><span>Total Tasks</span><i class="fa-solid fa-list-check"></i></div>
+          <strong id="stat-total">0</strong><small>All your tasks</small>
+        </article>
+        <article class="stat-card blue">
+          <div class="stat-top"><span>Completed</span><i class="fa-solid fa-circle-check"></i></div>
+          <strong id="stat-completed">0</strong><small>Great progress!</small>
+        </article>
+        <article class="stat-card peach">
+          <div class="stat-top"><span>Pending</span><i class="fa-regular fa-hourglass-half"></i></div>
+          <strong id="stat-pending">0</strong><small>Still to do</small>
+        </article>
+        <article class="stat-card pink">
+          <div class="stat-top"><span>Overdue</span><i class="fa-solid fa-bell"></i></div>
+          <strong id="stat-overdue">0</strong><small>Need attention</small>
+        </article>
+      </section>
+
+      <section class="progress-card">
+        <div class="progress-heading">
+          <div>
+            <h3>Today's Progress 🎯</h3>
+            <p id="progress-text">0 of 0 tasks completed today</p>
+          </div>
+          <strong id="progress-percent">0%</strong>
+        </div>
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+      </section>
+
+      <section class="tasks-section">
+        <div class="tasks-header">
+          <div>
+            <p class="eyebrow">STAY ORGANIZED</p>
+            <h2 id="current-view-title">All Tasks</h2>
+          </div>
+          <div class="task-controls">
+            <label class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="search" id="search-input" placeholder="Search tasks...">
+            </label>
+            <select id="sort-select" aria-label="Sort tasks">
+              <option value="date-asc">Earliest date</option>
+              <option value="date-desc">Latest date</option>
+              <option value="priority">Priority</option>
+              <option value="title">Title A–Z</option>
+            </select>
+          </div>
+        </div>
+        <div id="tasks-container" class="tasks-container"></div>
+      </section>
+
+      <footer class="page-footer">Made with 💜 for a more organized you.</footer>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="task-modal">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header class="modal-header">
+        <div>
+          <p class="eyebrow">PLAN SOMETHING GREAT</p>
+          <h2 id="modal-title">Create a task</h2>
+        </div>
+        <button class="icon-btn" type="button" id="close-modal-btn" aria-label="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <form id="task-form">
+        <input type="hidden" id="task-id">
+
+        <div class="form-group">
+          <label for="task-title">Task title *</label>
+          <input id="task-title" maxlength="120" required placeholder="e.g. Study JavaScript">
+        </div>
+
+        <div class="form-group">
+          <label for="task-desc">Description / Notes</label>
+          <textarea id="task-desc" rows="3" maxlength="500"
+            placeholder="Add a few details..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="task-category">Category</label>
+            <select id="task-category">
+              <option>Study</option>
+              <option>Work</option>
+              <option>Personal</option>
+              <option>Health</option>
+              <option>Shopping</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="task-priority">Priority</label>
+            <select id="task-priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="task-due-date">Due date</label>
+            <input type="date" id="task-due-date">
+          </div>
+          <div class="form-group">
+            <label for="task-repeat">Repeat</label>
+            <select id="task-repeat">
+              <option value="none">Does not repeat</option>
+              <option value="daily">Every day</option>
+              <option value="weekly">Every week</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-secondary" type="button" id="cancel-modal-btn">Cancel</button>
+          <button class="btn-primary" type="submit">
+            <i class="fa-solid fa-check"></i> Save Task
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script src="todo.js"></script>
+  <script src="navigation.js"></script>
+</body>
+</html>
